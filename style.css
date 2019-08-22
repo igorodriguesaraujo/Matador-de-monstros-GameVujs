@@ -1,0 +1,127 @@
+/* reset */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+img {
+  max-width: 100%;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+/* geral */
+.players {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+.player p,
+.monster p {
+  display: inline-block;
+  color: #fff;
+  font-weight: 600;
+  background: #000;
+  font-size: 0.85rem;
+  padding: 4px;
+}
+.player {
+  padding: 15px 10px;
+  background: url("./images/player.jpg") no-repeat center center;
+  background-size: cover;
+}
+.monster {
+  padding: 15px 10px;
+  background: url("./images/monster.jpg") no-repeat center center;
+  background-size: cover;
+}
+.life {
+  padding: 4px;
+  background: #fff;
+  border-radius: 50px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  max-width: 350px;
+}
+.life .bar {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 10px;
+  border-radius: 50px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  background-color: rgb(243, 51, 44);
+  transition: all 300ms;
+}
+.bar-attack {
+  display: block;
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 15%;
+}
+.movements {
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 15px 10px;
+  border-radius: 100px;
+  text-align: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+}
+.movements a {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 0 5px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 300ms;
+}
+.movements a img {
+  max-width: 50px;
+  transition: all 300ms;
+}
+.movements a:hover {
+  box-shadow: 0 3px 20px rgba(0, 0, 0, 0.8);
+  transform: scale(1.5);
+}
+.movements a:hover img {
+  /* box-shadow: 0 3px 20px rgba(0, 0, 0, 0.8); */
+  transform: rotate(-180deg);
+}
+
+.notify {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 100%;
+}
+.notify p {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 15px 10px;
+  border-radius: 8px;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(255, 0, 0, 0.8);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  animation: 0.3s slidedown forwards;
+}
+@keyframes slidedown {
+  from {
+    transform: translate3d(0, -55px, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
