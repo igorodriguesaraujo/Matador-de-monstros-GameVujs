@@ -5,7 +5,9 @@ new Vue({
     monster: 100,
     playerDamage: 0,
     monsterDamage: 0,
-    notification: ""
+    notification: "",
+    active: false,
+    activeEspecial: false
   },
   methods: {
     // Sistema randomico de danos e tratamento do valor(sem casas decimais)
@@ -26,11 +28,17 @@ new Vue({
     },
 
     getAttackEspecial() {
-      console.log("Ataque especial");
+      if (this.player <= 50) {
+        this.activeEspecial = true;
+        console.log("Ataque especial");
+      }
     },
 
     getHeal() {
-      console.log("Curar");
+      if (this.player <= 50) {
+        this.active = true;
+        this.player += 10;
+      }
     },
 
     getEnd() {

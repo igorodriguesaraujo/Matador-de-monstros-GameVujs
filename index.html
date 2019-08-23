@@ -11,8 +11,16 @@
 <body>
 
   <div id="app">
-    <div class="players">
+    <template>
+      <div class="modal-background">
+        <div class="modal-content">
+          <h1>Aqui entra um mensagem!</h1>
+          <button>Iniciar a parte!</button>
+        </div>
+      </div>
+    </template>
 
+    <div class="players">
       <div class="player">
         <p> Jogador: {{player}}%</p>
         <div class="life">
@@ -36,12 +44,20 @@
           <small>Ataque</small>
         </a>
         <!-- ataque especial -->
-        <a @click="getAttackEspecial">
-          <img src="./images/sprites-03.png" alt=""><br>
-          <small> Especial</small>
-        </a>
+        <template v-if="activeEspecial">
+          <a @click="getAttackEspecial">
+            <img src="./images/sprites-03.png" alt=""><br>
+            <small> Especial</small>
+          </a>
+        </template>
+        <template v-else>
+          <a class="disabled">
+            <img src="./images/sprites-03.png" alt=""><br>
+            <small> Especial</small>
+          </a>
+        </template>
 
-        <a @click="getHeal">
+        <a @click.once="getHeal" :class="{disabled:active}">
           <img src="./images/sprites-02.png" alt=""><br>
           <small>Curar</small>
         </a>

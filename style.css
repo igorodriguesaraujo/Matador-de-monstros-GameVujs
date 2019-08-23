@@ -94,10 +94,13 @@ a {
   transform: scale(1.5);
 }
 .movements a:hover img {
-  /* box-shadow: 0 3px 20px rgba(0, 0, 0, 0.8); */
   transform: rotate(-180deg);
 }
-
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+  animation-name: none !important;
+}
 .notify {
   position: absolute;
   top: 25%;
@@ -115,6 +118,30 @@ a {
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
   animation: 0.3s slidedown forwards;
 }
+
+/* MODAL */
+.modal-background {
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  position: absolute;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  height: 100vh;
+}
+
+/* ANIMATION */
 @keyframes slidedown {
   from {
     transform: translate3d(0, -55px, 0);
