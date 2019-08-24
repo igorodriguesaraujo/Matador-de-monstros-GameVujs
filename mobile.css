@@ -1,0 +1,29 @@
+@media (max-width: 360px) {
+  .monster {
+    background-position-x: -630px;
+  }
+  .player {
+    background-position-x: -129px;
+  }
+  .bar-attack {
+    bottom: 0;
+    padding: 24px 0;
+  }
+  .movements {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 0;
+  }
+  .movements a {
+    flex: 1 1 100px;
+  }
+  .movements a:hover {
+    transform: inherit;
+  }
+  .modal-content {
+    text-align: center;
+  }
+  .notify p {
+    margin: 0 10px;
+  }
+}
