@@ -11,11 +11,11 @@
 <body>
 
   <div id="app">
-    <template>
+    <template v-if="modal">
       <div class="modal-background">
         <div class="modal-content">
-          <h1>Aqui entra um mensagem!</h1>
-          <button>Iniciar a parte!</button>
+          <h1>{{message}}</h1>
+          <button @click="onReset">Iniciar a parte!</button>
         </div>
       </div>
     </template>
@@ -35,6 +35,13 @@
       </div>
     </div>
 
+    <!-- Notification -->
+    <template v-if="active">
+      <div class="notify">
+        <p>{{message}}</p>
+      </div>
+    </template>
+
     <!-- Moviemntos -->
     <div class="bar-attack">
       <div class="movements">
@@ -43,13 +50,15 @@
           <img src="./images/sprites-04.png" alt=""><br>
           <small>Ataque</small>
         </a>
+        
         <!-- ataque especial -->
-        <template v-if="activeEspecial">
-          <a @click="getAttackEspecial">
+        <template v-if="disabledEspecial">
+          <a @click="getEspecialAttack">
             <img src="./images/sprites-03.png" alt=""><br>
             <small> Especial</small>
           </a>
         </template>
+
         <template v-else>
           <a class="disabled">
             <img src="./images/sprites-03.png" alt=""><br>
@@ -57,11 +66,20 @@
           </a>
         </template>
 
-        <a @click.once="getHeal" :class="{disabled:active}">
-          <img src="./images/sprites-02.png" alt=""><br>
-          <small>Curar</small>
-        </a>
+        <template v-if="disabled">
+          <a @click="getHeal" >
+            <img src="./images/sprites-02.png" alt="Curar agora"><br>
+            <small>Curar</small>
+          </a>
+        </template>
 
+        <template v-else>
+          <a class="disabled" >
+            <img src="./images/sprites-02.png" alt="Curar agora"><br>
+            <small>Curar</small>
+          </a>
+        </template>
+        
         <a @click="getEnd">
           <img src="./images/sprites-01.png" alt=""><br>
           <small>Desistir</small>
@@ -69,11 +87,9 @@
       </div>
     </div>
 
-    <!-- Notification -->
-    <div class="notify" v-show="notification">
-      <p>{{notification}}</p>
-    </div>
   </div>
+    
+
 
   <script src="app.js" type="text/javascript"></script>
 </body>

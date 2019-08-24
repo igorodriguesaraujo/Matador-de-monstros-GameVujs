@@ -3,53 +3,71 @@ new Vue({
   data: {
     player: 100,
     monster: 100,
-    playerDamage: 0,
-    monsterDamage: 0,
-    notification: "",
+    modal: false,
     active: false,
-    activeEspecial: false
+    disabled: true,
+    disabledEspecial: true,
+    message: ""
+  },
+  computed: {
+    getResult() {
+      if (this.player <= 0) {
+        this.player = 0;
+        this.modal = true;
+        this.message = "Você perdeu! :(";
+      } else if (this.monster <= 0) {
+        this.monster = 0;
+        this.modal = true;
+        this.message = "Você venceu o monstro! ;)";
+      }
+    }
   },
   methods: {
-    // Sistema randomico de danos e tratamento do valor(sem casas decimais)
+    onReset() {
+      this.getEnd();
+      this.modal = false;
+      this.player = 100;
+      this.monster = 100;
+    },
     getDamage(min, max) {
-      let damage = Math.random() * (max - min) + min;
-      return damage.toFixed(0);
+      let random = Math.random() * (max - min) + min;
+      return random.toFixed(0);
     },
-
-    // Metodo de ataque
-    getSimpleAttack() {
-      this.playerDamage = this.getDamage(1, 3);
-      this.monsterDamage = this.getDamage(4, 5);
-      this.player -= this.monsterDamage;
-      this.monster -= this.playerDamage;
-
-      // Notificando o usuario sobre o valor dos danos sofridos
-      this.getNotification(this.playerDamage, this.monsterDamage);
-    },
-
-    getAttackEspecial() {
-      if (this.player <= 50) {
-        this.activeEspecial = true;
-        console.log("Ataque especial");
-      }
-    },
-
-    getHeal() {
-      if (this.player <= 50) {
-        this.active = true;
-        this.player += 10;
-      }
-    },
-
-    getEnd() {
-      console.log("Desitir");
-    },
-
     getNotification(player, monster) {
-      this.notification = `Jogador realizou dano de ${player} | Monstro realizou dano de ${monster}`;
+      this.active = true;
+      this.message = `
+      Jogador realizou ataque com danos de ${player} | 
+      Monstro realizou ataque com danos de ${monster}
+      `;
       setTimeout(() => {
-        this.notification = false;
+        this.active = false;
       }, 5000);
+    },
+    getSimpleAttack() {
+      let playerDamage = this.getDamage(1, 3);
+      let monsterDamage = this.getDamage(1, 5);
+
+      this.getNotification(playerDamage, monsterDamage);
+      this.monster -= playerDamage;
+      this.player -= monsterDamage;
+      this.getResult;
+    },
+    getEspecialAttack() {
+      this.monster -= 25;
+      this.disabledEspecial = false;
+    },
+    getHeal() {
+      if (this.player < 60) {
+        this.player += 25;
+        this.disabled = false;
+      }
+    },
+    getEnd() {
+      this.modal = true;
+      this.active = false;
+      this.disabled = true;
+      this.disabledEspecial = true;
+      this.message = "Que pena você desistiu! Tente novamente!";
     }
   }
 });
